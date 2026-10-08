@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReturnFlow — Retail Returns, Refunds & Claims Exception Management</title>
+  <meta name="description" content="Enterprise reverse logistics and exception management platform with automated AI decisioning and human-in-the-loop workflows.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Fullscreen Login View -->
+  <div id="login-view" class="page-view active">
+    <!-- Populated by Pages.renderLogin() -->
+  </div>
+
+  <!-- Main Authenticated App Shell -->
+  <div id="app-main-shell" class="app-container" style="display: none;">
+    
+    <!-- Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-icon">R</div>
+        <div class="brand-text">
+          <h2>ReturnFlow</h2>
+          <span>Enterprise Operations</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-section-title">Operations</div>
+        <button class="nav-item active" data-page="dashboard" onclick="AppRouter.navigate('dashboard')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Overview</span>
+        </button>
+
+        <button class="nav-item" data-page="new" onclick="AppRouter.navigate('new')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <span>Create Return</span>
+        </button>
+
+        <button class="nav-item" data-page="cases" onclick="AppRouter.navigate('cases')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span>Return Cases</span>
+        </button>
+
+        <button class="nav-item" data-page="exceptions" onclick="AppRouter.navigate('exceptions')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Exception Queue</span>
+          <span class="nav-badge" id="nav-exc-badge">3</span>
+        </button>
+
+        <div class="nav-section-title">Resolution & Recovery</div>
+        <button class="nav-item" data-page="refund" onclick="AppRouter.navigate('refund')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          <span>Refund & Decision</span>
+        </button>
+
+        <button class="nav-item" data-page="finance" onclick="AppRouter.navigate('finance')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          <span>Finance Approval</span>
+          <span class="nav-badge" id="nav-ref-badge">2</span>
+        </button>
+
+        <button class="nav-item" data-page="vendor" onclick="AppRouter.navigate('vendor')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+          <span>Vendor Recovery</span>
+        </button>
+
+        <button class="nav-item" data-page="disposition" onclick="AppRouter.navigate('disposition')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"></polyline><line x1="1" y1="3" x2="23" y2="3"></line><polygon points="10 12 14 12 14 16 10 16"></polygon></svg>
+          <span>Disposition (WMS)</span>
+        </button>
+
+        <div class="nav-section-title">Insights & System</div>
+        <button class="nav-item" data-page="analytics" onclick="AppRouter.navigate('analytics')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Analytics</span>
+        </button>
+
+        <button class="nav-item" data-page="notifications" onclick="AppRouter.navigate('notifications')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span>Notifications</span>
+          <span class="nav-badge" id="nav-notif-badge">4</span>
+        </button>
+
+        <button class="nav-item" data-page="activity" onclick="AppRouter.navigate('activity')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          <span>Activity Log</span>
+        </button>
+
+        <button class="nav-item" data-page="profile" onclick="AppRouter.navigate('profile')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>User Profile</span>
+        </button>
+
+        <button class="nav-item" data-page="admin" onclick="AppRouter.navigate('admin')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Admin Data</span>
+        </button>
+
+        <button class="nav-item" data-page="guide" onclick="AppRouter.navigate('guide')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Demo Guide</span>
+        </button>
+      </nav>
+
+      <div class="user-footer">
+        <div class="user-info">
+          <div class="user-avatar" id="side-user-avatar">PV</div>
+          <div class="user-meta">
+            <div class="user-name" id="side-user-name">Pooja Verma</div>
+            <span class="user-role-badge" id="side-user-role">Customer Service</span>
+          </div>
+        </div>
+        <button class="logout-btn" title="Sign Out" onclick="AppRouter.logout()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      
+      <!-- Top Sticky Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="header-icon-btn mobile-menu-btn" style="display: none;" onclick="AppRouter.toggleMobileSidebar()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          
+          <div class="breadcrumb">
+            <span>Operations</span>
+            <span>/</span>
+            <span class="breadcrumb-current" id="top-breadcrumb-current">Overview Dashboard</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Fast Demo Switcher Pill -->
+          <div class="demo-role-pill">
+            <span style="font-size: 10px; text-transform: uppercase; color: var(--secondary-slate);">Persona:</span>
+            <select id="header-demo-role-select" class="demo-role-select" onchange="AppRouter.handleRoleSwitch(this.value)">
+              <option value="cs.agent">Customer Service (Pooja Verma)</option>
+              <option value="returns.manager">Returns Manager (Vikramaditya Sen)</option>
+              <option value="finance.approver">Finance (Ananya Deshmukh)</option>
+              <option value="vendor.manager">Vendor Manager (Rajesh Nair)</option>
+              <option value="warehouse.manager">Warehouse Lead (Gurpreet Singh)</option>
+              <option value="admin">Administrator (System Admin)</option>
+            </select>
+          </div>
+
+          <!-- Notifications Icon -->
+          <button class="header-icon-btn" title="View Notifications" onclick="AppRouter.navigate('notifications')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="header-badge" id="header-notif-count">4</span>
+          </button>
+
+          <!-- User Preview -->
+          <div class="user-info" style="cursor: pointer;" onclick="AppRouter.navigate('profile')">
+            <div class="user-avatar" id="top-user-avatar" style="width: 32px; height: 32px; font-size: 11px;">PV</div>
+            <div class="user-meta" style="display: none; @media(min-width: 900px){display: block;}">
+              <div class="user-name" id="top-user-name" style="color: var(--primary-navy); font-size: 12px;">Pooja Verma</div>
+              <span class="user-role-badge" id="top-user-role" style="color: var(--text-muted); font-size: 10.5px;">Customer Service</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Page Container Views -->
+      <main class="content-area">
+        <section id="dashboard-view" class="page-view"></section>
+        <section id="new-view" class="page-view"></section>
+        <section id="cases-view" class="page-view"></section>
+        <section id="exceptions-view" class="page-view"></section>
+        <section id="refund-view" class="page-view"></section>
+        <section id="finance-view" class="page-view"></section>
+        <section id="vendor-view" class="page-view"></section>
+        <section id="disposition-view" class="page-view"></section>
+        <section id="analytics-view" class="page-view"></section>
+        <section id="notifications-view" class="page-view"></section>
+        <section id="activity-view" class="page-view"></section>
+        <section id="profile-view" class="page-view"></section>
+        <section id="admin-view" class="page-view"></section>
+        <section id="guide-view" class="page-view"></section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Reusable Modal Container -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div id="modal-box" class="modal-box modal-md">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title">Modal Title</h3>
+        <button class="modal-close-btn" onclick="UI.closeModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+      <div id="modal-footer" class="modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts in dependency order -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ai-engine.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
